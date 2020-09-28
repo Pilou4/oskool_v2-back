@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Information sur les parents</h3>
+    <ul>
+        <li>nom : {{ parent.firstname }}</li>
+        <li>prénom : {{ parent.lastname }}</li>
+        <li>adresse : {{ parent.adress }}</li>
+        <li>code Postal : {{ parent.zipcode }}</li>
+        <li>Ville : {{ parent.city }}</li>
+        <li>Téléphone : 0{{ parent.phone}}</li>
+    </ul>
+{% endblock %}

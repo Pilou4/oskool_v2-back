@@ -19,6 +19,28 @@ class EventsRepository extends ServiceEntityRepository
         parent::__construct($registry, Events::class);
     }
 
+    public function findByEvent($id)
+    {
+        // de base ma requete ressemble à : SELECT * FROM 
+        $queryBuilder = $this->createQueryBuilder('event');
+
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('event.id', $id)
+        );
+      
+        $queryBuilder->leftJoin('event.schools', 'school');
+        $queryBuilder->addSelect('school');
+
+        $queryBuilder->leftJoin('school.classes', 'classes');
+        $queryBuilder->addSelect('classes');
+
+        $queryBuilder->leftJoin('classes.teachers', 'teachers');
+        $queryBuilder->addSelect('teachers');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
     // /**
     //  * @return Events[] Returns an array of Events objects
     //  */

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<h3>Informations de l'élève</h3>
+
+<ul>
+    <li>Prénom : {{ student.firstname }}</li>
+    <li>Nom : {{ student.lastname }}</li>
+    <li>Age : {{ student.age }} ans</li>
+    <li>Date de naissance : {{ student.birthday | date("d/m/Y") }}</li>
+    <li>Classe : {{ student.level }}</li>
+    <li>Autorisation d'être photographier : {{ student.imageRight }}</li>
+    {% if student.hobbies is not empty %}
+        <li>Loisir : {{ student.hobbies }}</li>
+    {% endif %}    
+    
+    {% if student.health is not empty %}
+        <li>Information santé de l'élève : {{ student.health }}</li>
+    {% endif %}
+     
+</ul>
+{% if student.parents is not empty %}
+    <p><a href="{{ path('parent_view', {'id': student.id}) }}">Infos complémentaire</a></p>
+{% endif %}
+{% endblock %}

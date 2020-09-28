@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2 class="mb-5">Ajouter une école</h2>
+
+{{ form_start(schoolForm) }} 
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_row(schoolForm.name) }}
+            {{ form_row(schoolForm.adress) }}
+            {{ form_row(schoolForm.zipcode) }}
+            {{ form_row(schoolForm.city) }}
+            {{ form_row(schoolForm.students_number) }}
+            {{ form_row(schoolForm.agenda) }}
+            <input type="submit" value="Ajouter" class="btn btn-primary">
+        </div>
+    </div>
+    
+
+    
+{{ form_end(schoolForm) }}
+
+{% endblock %}

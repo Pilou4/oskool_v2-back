@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="d-flex flex-row justify-content-between mb-5">
+    <h2>Modifier une école</h2>
+    <div>
+        <a onClick="return confirm('Confirmez la suppression');" href="{{ path('school_delete', {'id': school.id}) }}" class="btn btn-danger">Supprimer</a>
+    </div>
+</div>
+{{ form_start(schoolForm) }} 
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_row(schoolForm.name) }}
+            {{ form_row(schoolForm.adress) }}
+            {{ form_row(schoolForm.zipcode) }}
+            {{ form_row(schoolForm.city) }}
+            {{ form_row(schoolForm.students_number) }}
+            {{ form_row(schoolForm.agenda) }}
+            <input type="submit" value="Ajouter" class="btn btn-primary">
+        </div>
+    </div>
+        
+{{ form_end(schoolForm) }}
+
+{% endblock %}

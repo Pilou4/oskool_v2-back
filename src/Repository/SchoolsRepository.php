@@ -19,6 +19,43 @@ class SchoolsRepository extends ServiceEntityRepository
         parent::__construct($registry, Schools::class);
     }
 
+
+    public function findWithSchool($id)
+    {
+        // de base ma requete ressemble à : SELECT * FROM 
+        $queryBuilder = $this->createQueryBuilder('schools');
+
+        // je personnalise ma requete
+
+        // je precise que je souhaite recupérer un element grace a son ID
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('schools.id', $id)
+        );
+        // maintenant le query builder va me donner une requete du genre :
+        // SELECT * FROM tvShow WHERE tvShow.id = 6
+
+        $queryBuilder->leftJoin('schools.events', 'events');
+        $queryBuilder->addSelect('events');
+
+        // je recupére les categories liés a ma serie
+        $queryBuilder->leftJoin('schools.classes', 'classes');
+        // j'ajoute aux objets à créer les catégorie
+        $queryBuilder->addSelect('classes');
+
+        $queryBuilder->leftJoin('classes.teachers', 'teachers');
+        $queryBuilder->addSelect('teachers');
+
+        $queryBuilder->leftJoin('classes.students', 'students');
+        $queryBuilder->addSelect('students');
+
+        $queryBuilder->leftJoin('students.parents', 'parents');
+        $queryBuilder->addSelect('parents');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Schools[] Returns an array of Schools objects
     //  */

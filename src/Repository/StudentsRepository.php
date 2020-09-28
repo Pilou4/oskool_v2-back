@@ -19,6 +19,25 @@ class StudentsRepository extends ServiceEntityRepository
         parent::__construct($registry, Students::class);
     }
 
+    public function findByStudent($id)
+    {
+    
+        $queryBuilder = $this->createQueryBuilder('students');
+
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('students.id', $id)
+        );
+        
+        $queryBuilder->leftJoin('students.parents', 'parent');
+        $queryBuilder->addSelect('parent');
+
+          $queryBuilder->leftJoin('students.classes', 'classes');
+        $queryBuilder->addSelect('classes');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
     // /**
     //  * @return Students[] Returns an array of Students objects
     //  */

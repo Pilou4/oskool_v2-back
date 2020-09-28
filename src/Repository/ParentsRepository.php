@@ -19,6 +19,29 @@ class ParentsRepository extends ServiceEntityRepository
         parent::__construct($registry, Parents::class);
     }
 
+    public function findByParent($id)
+    {
+        // de base ma requete ressemble à : SELECT * FROM 
+        $queryBuilder = $this->createQueryBuilder('parent');
+
+        // je personnalise ma requete
+
+        // je precise que je souhaite recupérer un element grace a son ID
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('parent.id', $id)
+        );
+        // maintenant le query builder va me donner une requete du genre :
+        // SELECT * FROM tvShow WHERE tvShow.id = 6
+
+        $queryBuilder->leftJoin('parent.students', 'students');
+        $queryBuilder->addSelect('students');
+        
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Parents[] Returns an array of Parents objects
     //  */

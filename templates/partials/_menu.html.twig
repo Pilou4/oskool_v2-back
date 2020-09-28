@@ -1,0 +1,18 @@
+<nav>
+    <ul>
+        <li><a href="{{ path('homepage') }}"> <img class="logo" src="{{ asset('assets/images/Logo.webp') }}" alt="logo"></img> </a></li>
+        <li><a href="{{ path('school_list') }}">liste des écoles</a></li>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <span class="mr-2">Bienvenue <b>{{ app.user.username }}</b></span>
+        {% endif %}
+       
+        {% if app.user %}
+        <li><a href="{{ path('app_logout') }}">se déconnecter</a></li>
+        <li><a class="nav-link" href="{{ path('user_password_change') }}">Changer le mot de passe</a></li>
+        {% else %}
+         {# <li><a href="{{ path('app_login') }}">se connecter</a></li> #}
+         {# <li><a href="{{ path('user_account_create') }}">Créer un compte</a></li> #}
+         {% endif %}
+    </ul>
+</nav>

@@ -19,6 +19,32 @@ class ClassesRepository extends ServiceEntityRepository
         parent::__construct($registry, Classes::class);
     }
 
+    public function findByClasse($id) {
+
+        $queryBuilder = $this->createQueryBuilder('classes');
+        
+
+        $queryBuilder->where(
+            $queryBuilder->expr()->eq('classes.id', $id)
+        );
+
+        $queryBuilder->leftJoin('classes.schools', 'schools');
+        $queryBuilder->addSelect('schools');
+
+        $queryBuilder->leftJoin('schools.events', 'events');
+        $queryBuilder->addSelect('events');
+
+        $queryBuilder->leftJoin('classes.teachers', 'teachers');
+        $queryBuilder->addSelect('teachers');
+
+        $queryBuilder->leftJoin('classes.students', 'students');
+        $queryBuilder->addSelect('students');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Classes[] Returns an array of Classes objects
     //  */

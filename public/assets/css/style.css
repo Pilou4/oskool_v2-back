@@ -1,0 +1,40 @@
+body
+{
+
+}
+
+nav 
+{
+    background-color: orange;
+    padding: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+nav > ul
+{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;   
+} 
+
+.logo
+{
+    width: 120px;
+    /* height: 50px; */
+}
+
+footer > ul 
+{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: rgb(221, 146, 8);
+    margin-top: 40px;
+}
+
+footer > ul > li 
+{
+
+}
