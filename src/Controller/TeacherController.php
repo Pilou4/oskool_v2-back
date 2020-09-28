@@ -78,7 +78,7 @@ class TeacherController extends AbstractController
             $manager->persist($teacher);
             $manager->flush();
 
-            $this->addFlash("success", "L'enseignant a bien été ajoutée");
+            $this->addFlash("success", "L'enseignant a bien été modifié");
             return $this->redirectToRoute("classe_list");
         }
 

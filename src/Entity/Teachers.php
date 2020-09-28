@@ -39,6 +39,11 @@ class Teachers
      */
     private $classes;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="teacher", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->classes = new ArrayCollection();
@@ -111,6 +116,24 @@ class Teachers
             if ($class->getTeachers() === $this) {
                 $class->setTeachers(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newTeacher = null === $user ? null : $this;
+        if ($user->getTeacher() !== $newTeacher) {
+            $user->setTeacher($newTeacher);
         }
 
         return $this;

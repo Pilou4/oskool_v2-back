@@ -54,6 +54,11 @@ class Parents
      */
     private $students;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="parent", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
@@ -159,6 +164,24 @@ class Parents
         if ($this->students->contains($student)) {
             $this->students->removeElement($student);
             $student->removeParent($this);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newParent = null === $user ? null : $this;
+        if ($user->getParent() !== $newParent) {
+            $user->setParent($newParent);
         }
 
         return $this;

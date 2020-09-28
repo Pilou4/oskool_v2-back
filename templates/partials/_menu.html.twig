@@ -11,8 +11,8 @@
         <li><a href="{{ path('app_logout') }}">se déconnecter</a></li>
         <li><a class="nav-link" href="{{ path('user_password_change') }}">Changer le mot de passe</a></li>
         {% else %}
-         {# <li><a href="{{ path('app_login') }}">se connecter</a></li> #}
-         {# <li><a href="{{ path('user_account_create') }}">Créer un compte</a></li> #}
+         <li><a href="{{ path('app_login') }}">se connecter</a></li>
+         <li><a href="{{ path('user_account_create') }}">Créer un compte</a></li>
          {% endif %}
     </ul>
 </nav>
