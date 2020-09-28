@@ -2,7 +2,7 @@
 
 
 {% block body %}
-<h3>Information de l'instituteur</h3>
+<h3>Information de l'instituteur   <a href="{{ path('teacher_update', {'id': teacher.id}) }}" class="btn btn-primary">Modifier</a></h3>
 <ul>
 
     <li>Prénom : {{ teacher.firstname }}</li>

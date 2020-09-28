@@ -4,15 +4,14 @@
     <h1>Nom de l'école : {{ classe.schools.name }}</h1>
     <h2>Niveau {{ classe.level }} de l'instituteur 
         {% if classe.teachers is not empty %}
-            <a href="{{ path('teacher_view', {'id': classe.teachers.id}) }}">{{ classe.teachers.firstname ~ " " ~ classe.teachers.lastname }}</a></h2>
-            <a href="{{ path('teacher_update', {'id': classe.id}) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ path('teacher_view', {'id': classe.teachers.id}) }}">{{ classe.teachers.firstname ~ " " ~ classe.teachers.lastname }}</a>
         {% else %}
             <a href="{{ path('teacher_add', {'id': classe.id}) }}" class="btn btn-primary">Ajouter</a>           
         {% endif %}
 
 
         
-    <h3>Listes des élèves</h3>
+    <h3>Listes des élèves <a href="{{ path('student_add', {'id': classe.id}) }}" class="btn btn-primary">Ajouter</a></h3>
     {% for student in classe.students %}
     <li><a href="{{ path('student_view', {'id': student.id}) }}">{{ student.firstname ~ " " ~ student.lastname }}</a></li>
     {% endfor %}

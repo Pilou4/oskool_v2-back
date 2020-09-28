@@ -3,11 +3,20 @@
 {% block body %}
 <h2>Créer un compte</h2>
 
+{{ form_start(userForm) }} 
 
-{{ form_start(form) }} 
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_row(userForm.email) }}
+            {{ form_row(userForm.password) }}
+          
+        </div>
+    </div>
     
-    {{ form_widget(form) }}
 
-    <input type="submit" value="Créer mon compte" class="btn btn-primary">
-{{ form_end(form) }}
+    <div> 
+        <input type="submit" value="Créer mon compte" class="btn btn-primary">
+    </div>
+
+{{ form_end(userForm) }}
 {% endblock %}

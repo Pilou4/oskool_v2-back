@@ -2,21 +2,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div>
-        <a href="{{ path('school_update', {'id': school.id}) }}" class="btn btn-primary">Modifier</a>
-    </div>
+     <h2>Nom de l'école : {{ school.name }}  <a href="{{ path('school_update', {'id': school.id}) }}" class="btn btn-primary">Modifier</a></h2>
     <ul>
-        <li>Nom de l'école : {{ school.name }}</li>
         <li>Adresse : {{ school.adress }}</li> 
         <li>Code postal : {{ school.zipcode }}</li>
         <li>Ville : {{ school.city }}</li>
         <li>Nombre d'élève de l'école : {{ school.studentsNumber }}</li>
     </ul>
    
-   <h2>Les classes</h2>
-    <div>
-        <a href="{{ path('classe_add', {'id': school.id}) }}" class="btn btn-primary">Ajouter</a>
-    </div>
+   <h2>Les classes   <a href="{{ path('classe_add', {'id': school.id}) }}" class="btn btn-primary">Ajouter</a> </h2>
     {% if school.classes is not empty %}
         {% for classe in school.classes %}
             <ul>

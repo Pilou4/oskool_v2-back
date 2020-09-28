@@ -82,7 +82,7 @@ class TeacherController extends AbstractController
             return $this->redirectToRoute("classe_list");
         }
 
-        return $this->render('teacher/add.html.twig', [
+        return $this->render('teacher/update.html.twig', [
             "teacherForm" => $form->createView()
         ]);
     }

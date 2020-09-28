@@ -3,10 +3,15 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Parents;
+use App\Entity\Teachers;
+use App\Repository\TeachersRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\TeacherType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -43,8 +48,15 @@ class UserCreateType extends AbstractType
                 'second_options' => ['label' => 'Repeter le mot de passe'],
             ]
         );
+
+        // $builder->add(
+        //     'teacher', 
+          
+        // );
+
     }
 
+    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

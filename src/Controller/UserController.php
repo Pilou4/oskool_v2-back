@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Teachers;
 use App\Form\UserCreateType;
 use App\Form\UserPasswordUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,7 @@ class UserController extends AbstractController
     public function createAccount(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
+      
         $form = $this->createForm(UserCreateType::class, $user);
 
         $form->handleRequest($request);
@@ -42,8 +44,7 @@ class UserController extends AbstractController
 
         return $this->render('user/create-account.html.twig',
             [
-                "form" =>
-                $form->createView()
+                "userForm" =>$form->createView()
             ]
         );
     }
