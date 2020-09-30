@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="d-flex flex-row justify-content-between mb-5">
+    <h2>Modifier une classe</h2>
+    <div>
+        <a onClick="return confirm('Confirmez la suppression');" href="{{ path('classe_delete', {'id': classe.id}) }}" class="btn btn-danger">Supprimer</a>
+    </div>
+</div>
+
+
+   
+
+
+{{ form_start(classForm) }} 
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_row(classForm.level) }}
+            {{ form_row(classForm.number) }}
+            {{ form_row(classForm.agenda) }}
+            <input type="submit" value="Modifier" class="btn btn-primary">
+        </div>
+    </div>
+    
+
+    
+{{ form_end(classForm) }}
+
+{% endblock %}
+

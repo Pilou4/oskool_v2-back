@@ -34,6 +34,7 @@ class UserController extends AbstractController
             $encodedPassword = $passwordEncoder->encodePassword($user, $plainPassword);
             $user->setPassword($encodedPassword);
 
+            $user->setRoles(['ROLE_PARENT']);
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->flush();

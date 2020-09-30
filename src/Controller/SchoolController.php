@@ -97,7 +97,8 @@ class SchoolController extends AbstractController
             ]
         );
     }
-      /**
+    
+    /**
      * @Route("/delete/{id}", name="school_delete", requirements={"id"="\d+"})
      */
     public function delete($id)

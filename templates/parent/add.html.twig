@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2 class="mb-5">Ajouter un parent</h2>
+
+{{ form_start(parentForm) }} 
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_row(parentForm.firstname) }}
+            {{ form_row(parentForm.lastname) }}
+            {{ form_row(parentForm.adress) }}
+            {{ form_row(parentForm.zipcode) }}
+            {{ form_row(parentForm.city) }}
+            {{ form_row(parentForm.phone) }}
+            <input type="submit" value="Ajouter" class="btn btn-primary">
+        </div>
+    </div>
+    
+
+    
+{{ form_end(parentForm) }}
+
+{% endblock %}

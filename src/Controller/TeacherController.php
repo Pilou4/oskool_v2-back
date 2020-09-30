@@ -79,7 +79,7 @@ class TeacherController extends AbstractController
             $manager->flush();
 
             $this->addFlash("success", "L'enseignant a bien été modifié");
-            return $this->redirectToRoute("classe_list");
+            return $this->redirectToRoute("_list");
         }
 
         return $this->render('teacher/update.html.twig', [

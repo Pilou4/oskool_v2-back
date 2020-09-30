@@ -2,10 +2,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('school_add') }}" class="btn btn-primary">Ajouter</a>
+    
     <ul>
         {% for school in schools %}
-            <li>Nom de l'école : <a href="{{ path('school_view', {'id': school.id}) }}">{{ school.name }}</a></li>
+            <h2>Nom de l'école : <a href="{{ path('school_view', {'id': school.id}) }}">{{ school.name }} <a href="{{ path('school_add') }}" class="btn btn-primary">Ajouter</a></h2></li>
             <li>Adresse : {{ school.adress }}</li>
             <li>Adresse : {{ school.zipcode }}</li>
             <li>Adresse : {{ school.city }}</li></br>
