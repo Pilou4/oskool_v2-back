@@ -3,7 +3,33 @@
 
 {% block body %}
     
-    <ul>
+    <table>
+        {% for school in schools %}
+       
+        <tr>
+            <th>id</th>
+            <th>nom</th>
+            <th>adresse</th>
+            <th>code postal</th>
+            <th>ville</th>
+            <th>nombre d'élèves</th>
+            <th>agenda</th>
+            
+        </tr>
+        <tr>
+            <td>{{ school.id }}</td>
+            <td><a href="{{ path('school_view', {'id': school.id}) }}">{{ school.name }}</a></td>
+            <td>{{ school.adress }}</td>
+            <td>{{ school.zipcode }}</td>
+            <td>{{ school.city }}</td>
+            <td> {{ school.studentsNumber ? school.studentsNumber : 'Null' }}</td>
+            <td>{{ school.agenda ? school.agenda : 'Null' }}</td>
+            
+        </tr>
+        {% endfor %}    
+    </table>
+
+    {# <ul>
         {% for school in schools %}
             <h2>Nom de l'école : <a href="{{ path('school_view', {'id': school.id}) }}">{{ school.name }} <a href="{{ path('school_add') }}" class="btn btn-primary">Ajouter</a></h2></li>
             <li>Adresse : {{ school.adress }}</li>
@@ -11,7 +37,7 @@
             <li>Adresse : {{ school.city }}</li></br>
         {% endfor %}    
 
-    </ul>
+    </ul> #}
 
 
 {% endblock %}

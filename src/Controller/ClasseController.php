@@ -20,7 +20,14 @@ class ClasseController extends AbstractController
      */
     public function list()
     {
-        return $this->render('classe/list.html.twig');
+         /** @var Classesrepository */
+         $repository = $this->getDoctrine()->getRepository(Classes::class);
+         $classe = $repository->findall;
+        return $this->render('classe/list.html.twig',
+        [
+            "classe" => $classe
+        ]);
+
     }
 
     /**

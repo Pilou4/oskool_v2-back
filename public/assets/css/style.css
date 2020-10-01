@@ -1,6 +1,6 @@
 body
 {
-
+    font-size: 1.3rem;
 }
 
 nav 
@@ -34,6 +34,23 @@ footer > ul
     margin-top: 40px;
 }
 
+table
+{
+    border-collapse: collapse;
+    
+}
+th
+{
+    border: 1px solid black; 
+    padding: 20px;   
+    text-align: center;
+}
+td
+{
+    border: 1px solid black;
+    padding: 20px;  
+    text-align: center;  
+}
 footer > ul > li 
 {
 

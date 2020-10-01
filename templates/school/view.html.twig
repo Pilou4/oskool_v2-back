@@ -2,15 +2,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-     <h2>Nom de l'école : {{ school.name }}  <a href="{{ path('school_update', {'id': school.id}) }}" class="btn btn-primary">Modifier</a></h2>
-    <ul>
-        <li>Adresse : {{ school.adress }}</li> 
-        <li>Code postal : {{ school.zipcode }}</li>
-        <li>Ville : {{ school.city }}</li>
-        <li>Nombre d'élève de l'école : {{ school.studentsNumber }}</li>
-    </ul>
-   
-   <h2>Les classes   <a href="{{ path('classe_add', {'id': school.id}) }}" class="btn btn-primary">Ajouter</a> </h2>
+     <h1>Ecole : {{ school.name }}  <a href="{{ path('school_update', {'id': school.id}) }}" class="btn btn-primary">Modifier</a></h1>
+    
+    <h2> Liste des classes :</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>sections</th>
+            <th>nombre d'élève</th>
+            <th>agenda</th>
+            <th>enseignant</th>
+        </tr>
+        {% for classe in school.classes %}
+        <tr>
+            <td>{{ classe.id }}</td>
+            <td><a href="{{ path('classe_view', {'id': classe.id}) }}">{{ classe.level }}</a></td>
+            <td>{{ classe.number }}</td>
+            <td>{{ classe.agenda ? classe.agenda : 'Null' }}</td>
+            <td>{{ classe.teachers.lastname ? classe.teachers.lastname : 'Null' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+   {# <h2>Les classes   <a href="{{ path('classe_add', {'id': school.id}) }}" class="btn btn-primary">Ajouter</a> </h2>
     {% if school.classes is not empty %}
         {% for classe in school.classes %}
             <ul>
@@ -18,5 +31,5 @@
             </ul>
         {% endfor %}
         
-    {% endif %}
+    {% endif %} #}
 {% endblock %}
