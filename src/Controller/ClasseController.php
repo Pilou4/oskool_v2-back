@@ -106,7 +106,7 @@ class ClasseController extends AbstractController
         // 2 - on recupère le manager
         $manager = $this->getDoctrine()->getManager();
 
-        if (is_null($classe->getId())) {
+        if (!is_null($classe->getId())) {
             // 3 - on demande au manager de supprimer l'entité
             $manager->remove($classe);
             $manager->flush();
@@ -114,7 +114,7 @@ class ClasseController extends AbstractController
             // 4 - on met un message pour dire que ca s'est bien passé
             $this->addFlash("success", "La classe a bien été supprimée");
         }else {
-            $this->addFlash("error", "La classd ne peut pas être supprimé !");
+            $this->addFlash("error", "La classe ne peut pas être supprimé !");
         }
         // 5 - on redirige vers une page qui montre l'effet (la liste des series, on va pouvoir voir que la serie n'y est plus)
         return $this->redirectToRoute('school_list');

@@ -35,7 +35,7 @@ class Teachers
     private $mobile;
 
     /**
-     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="teachers")
+     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="teachers",orphanRemoval=true)
      */
     private $classes;
 

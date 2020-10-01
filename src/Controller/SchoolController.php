@@ -38,7 +38,7 @@ class SchoolController extends AbstractController
          /** @var Schoolsrepository $repository */
         $repository = $this->getDoctrine()->getRepository(Schools::class);
         $school = $repository->findWithSchool($id);
-
+        dump($school);
         return $this->render(
             'school/view.html.twig',
              [
@@ -77,7 +77,6 @@ class SchoolController extends AbstractController
         /** @var Schoolsrepository $repository */
         $repository = $this->getDoctrine()->getRepository(Schools::class);
         $school = $repository->findWithSchool($id);
-
         $form = $this->createForm(SchoolType::class, $school);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
@@ -108,6 +107,7 @@ class SchoolController extends AbstractController
         /** @var Schoolsrepository $repository */
         $repository = $this->getDoctrine()->getRepository(Schools::class);
         $school = $repository->findWithSchool($id);
+
 
         // 2 - on recupère le manager
         $manager = $this->getDoctrine()->getManager();

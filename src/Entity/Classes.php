@@ -46,7 +46,7 @@ class Classes
     private $teachers;
 
     /**
-     * @ORM\OneToMany(targetEntity=Students::class, mappedBy="classes")
+     * @ORM\OneToMany(targetEntity=Students::class, mappedBy="classes",orphanRemoval=true)
      */
     private $students;
 

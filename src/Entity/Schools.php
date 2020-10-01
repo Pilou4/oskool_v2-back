@@ -55,7 +55,7 @@ class Schools
     private $events;
 
     /**
-     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="schools")
+     * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="schools",orphanRemoval=true)
      */
     private $classes;
 
