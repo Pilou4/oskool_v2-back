@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Classe de {{ classe.level }} de {{ classe.teachers.firstname ~ ' ' ~ classe.teachers.lastname }} </h1>
-    <h2>Liste d'élèves</h2>
+    {# <h2>Liste d'élèves</h2>
     <table>
         <tr>
             <th>id</th>
@@ -24,16 +24,16 @@
             <td>{{ student.imageRight ? student.imageRight : 'Null' }}</td>
         </tr>
         {% endfor %}
-    </table>
+    </table> #}
 
 
-    <h1>Nom de l'école : {{ classe.schools.name }} </h1>
-    <h2>Niveau {{ classe.level }} <a href="{{ path('classe_update', {'id': classe.id}) }}" class="btn btn-primary">Modifier</a>
+    {# <h1>Nom de l'école : {{ classe.schools.name }} </h1> #}
+    {# <h2>Niveau {{ classe.level }} <a href="{{ path('classe_update', {'id': classe.id}) }}" class="btn btn-primary">Modifier</a>
         {% if classe.teachers is not empty %}
             <h2>Instituteur <a href="{{ path('teacher_view', {'id': classe.teachers.id}) }}">{{ classe.teachers.firstname ~ " " ~ classe.teachers.lastname }}</a></h2>
         {% else %}
             <a href="{{ path('teacher_add', {'id': classe.id}) }}" class="btn btn-primary">Ajouter</a>           
-        {% endif %}
+        {% endif %} #}
 
 
         

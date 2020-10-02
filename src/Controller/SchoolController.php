@@ -38,7 +38,6 @@ class SchoolController extends AbstractController
          /** @var Schoolsrepository $repository */
         $repository = $this->getDoctrine()->getRepository(Schools::class);
         $school = $repository->findWithSchool($id);
-        dump($school);
         return $this->render(
             'school/view.html.twig',
              [

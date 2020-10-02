@@ -12,14 +12,22 @@
             <th>nombre d'élève</th>
             <th>agenda</th>
             <th>enseignant</th>
+            <th>Liste des élèves</th>
         </tr>
         {% for classe in school.classes %}
         <tr>
             <td>{{ classe.id }}</td>
-            <td><a href="{{ path('classe_view', {'id': classe.id}) }}">{{ classe.level }}</a></td>
+            <td>{{ classe.level }}</td>
             <td>{{ classe.number }}</td>
             <td>{{ classe.agenda ? classe.agenda : 'Null' }}</td>
-            <td>{{ classe.teachers.lastname ? classe.teachers.lastname : 'Null' }}</td>
+            <td>
+                {% if classe.teachers is not empty %} 
+                    {{ classe.teachers.firstname ~ ' ' ~ classe.teachers.lastname }}
+                {% else %}
+                Null
+                {% endif %}
+            </td>
+            <td><a href="{{ path('classe_view', {'id': classe.id}) }}">détails</a></td>
         </tr>
         {% endfor %}
     </table>

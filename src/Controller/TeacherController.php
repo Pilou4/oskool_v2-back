@@ -22,7 +22,13 @@ class TeacherController extends AbstractController
      */
     public function list()
     {
-        return $this->render('teacher/list.html.twig');
+        $repository = $this->getDoctrine()->getRepository(Teachers::class);
+        $teachers = $repository->findAll();
+        return $this->render('teacher/list.html.twig',
+            [
+                'teachers' => $teachers
+            ]
+        );
     }
 
     /**
@@ -35,9 +41,9 @@ class TeacherController extends AbstractController
         $teacher = $repository->findByTeacher($id);
 
         return $this->render('teacher/view.html.twig',
-        [
-            "teacher" => $teacher
-        ]
+            [
+                "teacher" => $teacher
+            ]
         );
     }
 

@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
-
-
 {% block body %}
+    <h1>Liste des enseignants</h1>
+    <ul>
+    {# TODO creer 3 div  #}
+    {% for teacher in teachers %}
+        <li>
+            {{ teacher.firstname ~ ' ' ~ teacher.lastname }} 
+            <img class="logo_teacher" src="{{ asset('assets/images/logo_add_teacher.jpeg') }}" alt="logo"></img>
+            <img class="logo_teacher" src="{{ asset('assets/images/logo_update_teacher.jpg') }}" alt="logo"></img>
+            <img class="logo_teacher" src="{{ asset('assets/images/logo_delete_teacher2.jpeg') }}" alt="logo"></img>
+        </li>
+        
+    {% endfor %}    
+    </ul>
 
 {% endblock %}

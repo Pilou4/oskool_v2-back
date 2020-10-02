@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-
-
+    <h1>Liste des élèves</h1>
+    <ul>
+    {% for student in students %}
+        <li>{{ student.firstname ~ ' ' ~ student.lastname }}</li>
+        
+    {% endfor %}    
+    </ul>
 
 {% endblock %}
