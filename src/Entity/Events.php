@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\EventsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventsRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EventsRepository::class)
@@ -14,41 +15,49 @@ class Events
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"school:full:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"school:full:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"school:ful:read"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read"})
      */
     private $activity;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read"})
      */
     private $accompagnants;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read"})
      */
     private $meeting;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read"})
      */
     private $alert;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read"})
      */
     private $gear;
 

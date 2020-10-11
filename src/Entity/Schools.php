@@ -2,13 +2,27 @@
 
 namespace App\Entity;
 
-use App\Repository\SchoolsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SchoolsRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=SchoolsRepository::class)
+ * @ApiResource(
+ *      normalizationContext={"groups"={"school:read"}},
+ *      collectionOperations={"get"},
+ *      itemOperations={
+ *          "get"={
+ *          "normalization_context"={"groups"={"school:full:read"}}
+ *          }   
+ *      } 
+ * )
+ * @ApiFilter(SearchFilter::class,properties={"classe":"exact"})
  */
 class Schools
 {
@@ -16,46 +30,55 @@ class Schools
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"school:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"school:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"school:full:read"})
      */
     private $adress;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"school:full:read"})
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"school:full:read"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"school:full:read"})
      */
     private $students_number;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read"})
      */
     private $agenda;
 
     /**
      * @ORM\OneToMany(targetEntity=Events::class, mappedBy="schools")
+     * @Groups({"school:full:read"})
      */
     private $events;
 
     /**
      * @ORM\OneToMany(targetEntity=Classes::class, mappedBy="schools",orphanRemoval=true)
+     * @Groups({"school:full:read"})
      */
     private $classes;
 

@@ -1,7 +1,10 @@
 <nav>
     <ul>
         <li><a href="{{ path('homepage') }}"> <img class="logo" src="{{ asset('assets/images/Logo.webp') }}" alt="logo"></img> </a></li>
-        <li><a href="{{ path('school_list') }}">liste des écoles</a></li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="{{ path('school_list') }}">liste des écoles</a></li>
+        {% endif %}
+        {# <li><a href="{{ path('school_list') }}">liste des écoles</a></li> #}
         <li><a href="{{ path('teacher_list') }}">liste des enseignants</a></li>
         <li><a href="{{ path('student_list') }}">liste des élèves</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}

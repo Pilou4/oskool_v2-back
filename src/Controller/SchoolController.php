@@ -8,6 +8,7 @@ use App\Form\SchoolType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 /**
@@ -17,6 +18,7 @@ class SchoolController extends AbstractController
 {
     /**
      * @Route("/list", name="school_list")
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function list()
     {

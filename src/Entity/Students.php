@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StudentsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StudentsRepository::class)
@@ -16,46 +17,55 @@ class Students
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"school:full:read","parent:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $birthday;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $level;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $hobbies;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $health;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"school:full:read","parent:read"})
      */
     private $image_right;
 

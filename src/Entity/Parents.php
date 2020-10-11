@@ -2,13 +2,37 @@
 
 namespace App\Entity;
 
-use App\Repository\ParentsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ParentsRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ParentsRepository::class)
+ * @ApiResource(
+ *      attributes={
+ *      "order"={"lastname":"ASC"}
+ *      },
+ *      paginationItemsPerPage=2,
+ *      normalizationContext={"groups"={"parent:read"}},
+ *      collectionOperations={
+ *      "get",
+ *      "post"={
+ *          "normalization_context"={"groups"={"parent:post"}},
+ *          "controller"=App\Controller\Api\CreateParentController::class
+ *          }
+ *      },
+ *      itemOperations={
+ *      "get"={
+ *      "normalization_context"={"groups"={"parent:full:read"}}
+ *      }
+ *  }
+ * )
+ *  
  */
 class Parents
 {
@@ -16,46 +40,55 @@ class Parents
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"parent:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"parent:read","parent:post"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"parent:read","parent:post"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"parent:read","parent:post"})
      */
     private $adress;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"parent:read","parent:post"})
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"parent:read","parent:post"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"parent:read","parent:post"})
      */
     private $phone;
 
     /**
      * @ORM\ManyToMany(targetEntity=Students::class, mappedBy="parents")
+     * @Groups({"parent:read"})
      */
     private $students;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, mappedBy="parent", cascade={"persist", "remove"})
+     * @Groups({"parent:read"})
      */
     private $user;
 

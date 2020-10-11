@@ -48,12 +48,12 @@ class TeacherController extends AbstractController
     }
 
     /**
-     * @Route("/add/{id}", name="teacher_add", requirements={"id"="\d+"})
+     * @Route("/add", name="teacher_add", requirements={"id"="\d+"})
      */
-    public function add(Classes $classe, Request $request)
+    public function add(Request $request)
     {
         $teacher = new Teachers();
-        $teacher->addClass($classe);
+        // $teacher->addClass($classe);
 
         $form = $this->createForm(TeacherType::class, $teacher);
         $form->handleRequest($request);
@@ -62,8 +62,8 @@ class TeacherController extends AbstractController
             $manager->persist($teacher);
             $manager->flush();
 
-            $this->addFlash("success", "La classe a bien été ajoutée");
-            return $this->redirectToRoute("classe_view", ["id" => $classe->getId()]);
+            $this->addFlash("success", "L'enseigant a bien été ajoutée");
+            return $this->redirectToRoute("teacher_view", ["id" => $teacher->getId()]);
         }
 
         return $this->render('teacher/add.html.twig', [
@@ -85,11 +85,37 @@ class TeacherController extends AbstractController
             $manager->flush();
 
             $this->addFlash("success", "L'enseignant a bien été modifié");
-            return $this->redirectToRoute("_list");
+            return $this->redirectToRoute("teacher_list");
         }
 
         return $this->render('teacher/update.html.twig', [
             "teacherForm" => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="teacher_delete", requirements={"id"="\d+"})
+     */
+    public function delete($id)
+    {
+        // 1 - on recupère l'entité à supprimer (param converter / repository)
+        // Nous on l'a fait avec le param converter
+        /** @var Teachersrepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Teachers::class);
+        $teacher = $repository->findByTeacher($id);
+
+
+        // 2 - on recupère le manager
+        $manager = $this->getDoctrine()->getManager();
+
+        // 3 - on demande au manager de supprimer l'entité
+        $manager->remove($teacher);
+        $manager->flush();
+
+        // 4 - on met un message pour dire que ca s'est bien passé
+        $this->addFlash("success", "L'enseignant a bien été supprimée");
+
+        // 5 - on redirige vers une page qui montre l'effet (la liste des series, on va pouvoir voir que la serie n'y est plus)
+        return $this->redirectToRoute('teacher_list');
     }
 }

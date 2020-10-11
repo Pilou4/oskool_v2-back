@@ -3,7 +3,7 @@
 
 {% block body %}
     
-    <table>   
+    {# <table>   
         <tr>
             <th>id</th>
             <th>nom</th>
@@ -26,9 +26,9 @@
             
         </tr>
         {% endfor %}    
-    </table>
+    </table> #}
 
-    {# <ul>
+    <ul>
         {% for school in schools %}
             <h2>Nom de l'école : <a href="{{ path('school_view', {'id': school.id}) }}">{{ school.name }} <a href="{{ path('school_add') }}" class="btn btn-primary">Ajouter</a></h2></li>
             <li>Adresse : {{ school.adress }}</li>
@@ -36,7 +36,7 @@
             <li>Adresse : {{ school.city }}</li></br>
         {% endfor %}    
 
-    </ul> #}
+    </ul>
 
 
 {% endblock %}

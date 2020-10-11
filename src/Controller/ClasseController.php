@@ -22,7 +22,7 @@ class ClasseController extends AbstractController
     {
          /** @var Classesrepository */
          $repository = $this->getDoctrine()->getRepository(Classes::class);
-         $classe = $repository->findall;
+         $classe = $repository->findAll();
         return $this->render('classe/list.html.twig',
         [
             "classe" => $classe
@@ -49,11 +49,11 @@ class ClasseController extends AbstractController
     /**
      * @Route("/add/{id}", name="classe_add", requirements={"id"="\d+"})
      */
-    public function add(Schools $schools, Request $request)
+    public function add(Schools $school, Request $request)
     {
         $classe = new Classes();
-        $classe->setSchools($schools);
-
+        $classe->setSchools($school);
+      
         $form = $this->createForm(ClasseType::class, $classe);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
@@ -62,8 +62,8 @@ class ClasseController extends AbstractController
             $manager->flush();
 
             $this->addFlash("success", "La classe a bien été ajoutée");
-            return $this->redirectToRoute("school_view", ["id" => $schools->getId()]);
-        }
+            return $this->redirectToRoute('school_view', ["id" => $school->getId()]);
+        } 
 
         return $this->render('classe/add.html.twig', [
             "classForm" => $form->createView()

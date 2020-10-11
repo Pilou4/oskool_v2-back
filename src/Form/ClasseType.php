@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Classes;
+use App\Entity\Teachers;
 use Doctrine\DBAL\Types\IntegerType as TypesIntegerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ClasseType extends AbstractType
 {
@@ -26,7 +28,8 @@ class ClasseType extends AbstractType
             IntegerType::class,
             [
                 'label'=>'nombre d\'élève'
-            ]);
+            ]
+        );
 
         $builder->add(
             'agenda',
@@ -35,7 +38,17 @@ class ClasseType extends AbstractType
                 'label' => 'agenda',
                 "required" => false,                
             ]
-            );
+        );
+
+        $builder->add(
+            "teachers",
+            EntityType::class,
+            [
+                "class" => Teachers::class,
+                "choice_label" => "lastname",
+                "required" => false
+            ]
+        );
         
     }
 

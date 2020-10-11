@@ -4,34 +4,15 @@
 {% block body %}
      <h1>Ecole : {{ school.name }}  <a href="{{ path('school_update', {'id': school.id}) }}" class="btn btn-primary">Modifier</a></h1>
     
-    <h2> Liste des classes :</h2>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>sections</th>
-            <th>nombre d'élève</th>
-            <th>agenda</th>
-            <th>enseignant</th>
-            <th>Liste des élèves</th>
-        </tr>
-        {% for classe in school.classes %}
-        <tr>
-            <td>{{ classe.id }}</td>
-            <td>{{ classe.level }}</td>
-            <td>{{ classe.number }}</td>
-            <td>{{ classe.agenda ? classe.agenda : 'Null' }}</td>
-            <td>
-                {% if classe.teachers is not empty %} 
-                    {{ classe.teachers.firstname ~ ' ' ~ classe.teachers.lastname }}
-                {% else %}
-                Null
-                {% endif %}
-            </td>
-            <td><a href="{{ path('classe_view', {'id': classe.id}) }}">détails</a></td>
-        </tr>
+    <h2>Evenements prévue</h2>
+    {% if school.events is not empty %}
+        {% for event in school.events %}
+            <ul>
+                <li>{{ event.name }}</li>
+            </ul>
         {% endfor %}
-    </table>
-   {# <h2>Les classes   <a href="{{ path('classe_add', {'id': school.id}) }}" class="btn btn-primary">Ajouter</a> </h2>
+    {% endif %}
+   <h2>Les classes   <a href="{{ path('classe_add', {'id': school.id}) }}" class="btn btn-primary">Ajouter</a> </h2>
     {% if school.classes is not empty %}
         {% for classe in school.classes %}
             <ul>
@@ -39,5 +20,5 @@
             </ul>
         {% endfor %}
         
-    {% endif %} #}
+    {% endif %}
 {% endblock %}
