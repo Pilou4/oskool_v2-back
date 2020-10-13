@@ -29,6 +29,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      itemOperations={
  *      "get"={
  *      "normalization_context"={"groups"={"parent:full:read"}}
+ *      },
+ *      "put"={
+ *          "security"="is_granted('EDIT_PARENT',object)"
+ *      },
+ *      "delete"={
+ *          "security"="is_granted('EDIT_PARENT',object)"
  *      }
  *  }
  * )
@@ -40,55 +46,55 @@ class Parents
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"parent:read"})
+     * @Groups({"parent:read","parent:full:read", "student:full:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"parent:read","parent:post"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"parent:read","parent:post"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"parent:read","parent:post"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
      */
     private $adress;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"parent:read","parent:post"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"parent:read","parent:post"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"parent:read","parent:post"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
      */
     private $phone;
 
     /**
      * @ORM\ManyToMany(targetEntity=Students::class, mappedBy="parents")
-     * @Groups({"parent:read"})
+     * @Groups({"parent:read","parent:full:read"})
      */
     private $students;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, mappedBy="parent", cascade={"persist", "remove"})
-     * @Groups({"parent:read"})
+     * @Groups({"parent:read","parent:full:read"})
      */
     private $user;
 

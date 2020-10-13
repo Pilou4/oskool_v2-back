@@ -5,11 +5,34 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StudentsRepository;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StudentsRepository::class)
+ *  @ApiResource(
+ *      attributes={
+ *      "order"={"lastname":"ASC"}
+ *      },
+ *      paginationItemsPerPage=2,
+ *      normalizationContext={"groups"={"student:read"}},
+ *      collectionOperations={
+ *      "get",
+ *      "post"={
+ *          "normalization_context"={"groups"={"student:post"}},
+ *          "controller"=App\Controller\Api\CreateStudentController::class
+ *          }
+ *      },
+ *      itemOperations={
+ *      "get"={
+ *      "normalization_context"={"groups"={"student:full:read"}},
+ *     },
+ *      "put"={
+ *          "security"="is_granted('EDIT_STUDENT',object)"
+ *      },
+ *  }
+ * )
  */
 class Students
 {
@@ -17,65 +40,67 @@ class Students
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:read","student:full:read","parent:full:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:read","student:full:read","student:post","parent:full:read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:read","student:full:read","student:post","parent:full:read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
      */
     private $birthday;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
      */
     private $level;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
      */
     private $hobbies;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
      */
     private $health;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"school:full:read","parent:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
      */
     private $image_right;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="students")
+     * @ORM\ManyToOne(targetEntity=Classes::class, inversedBy="students",)
+     * @Groups({"student:full:read","parent:full:read"})
      */
     private $classes;
 
     /**
      * @ORM\ManyToMany(targetEntity=Parents::class, inversedBy="students")
+     * @Groups({"student:full:read"})
      */
     private $parents;
 

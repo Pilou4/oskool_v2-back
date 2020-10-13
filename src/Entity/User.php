@@ -22,7 +22,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"parent:read"})
+     * @Groups({"parent:read","parent:full:read"})
      */
     private $email;
 
