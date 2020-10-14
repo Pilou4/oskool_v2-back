@@ -31,6 +31,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "put"={
  *          "security"="is_granted('EDIT_STUDENT',object)"
  *      },
+ *      "delete"={
+ *          "security"="is_granted('EDIT_STUDENT',object)"
+ *      }
  *  }
  * )
  */

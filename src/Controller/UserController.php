@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Teachers;
 use App\Form\UserCreateType;
 use App\Form\UserPasswordUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,7 +78,6 @@ class UserController extends AbstractController
             ]
         );
     }
-
 }
   
 

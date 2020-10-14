@@ -4,10 +4,16 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventsRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EventsRepository::class)
+ * @ApiResource(
+ *  normalizationContext={},
+ *  collectionOperations={"get"},
+ * itemOperations={"get"}
+ * )
  */
 class Events
 {
