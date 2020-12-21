@@ -7,12 +7,19 @@ use App\Repository\UserRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
  *  normalizationContext={"groups"={"user:read"}},
- *  collectionOperations={"get"},
+ *  collectionOperations={
+ *  "get",
+ *  "post"={
+ *      "normalization_context"={"groups"={"user:post"}},
+ *      "path"="/login/add",
+ *  }
+ * },
  * itemOperations={"get"}
  * )
  */
@@ -28,7 +35,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"parent:read","parent:full:read","user:read"})
+     * @Groups({"parent:read","parent:full:read","user:read","user:post"})
      */
     private $email;
 
@@ -36,13 +43,19 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      * @Groups({"user:read"})
      */
-    private $roles = [];
+    private $roles = ["ROLE_PARENT"];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"user:post"})
      */
     private $password;
+
+    /**
+     *  @SerializedName("password")
+     */
+    private $plainPassword;
 
     /**
      * @ORM\OneToOne(targetEntity=Teachers::class, inversedBy="user", cascade={"persist", "remove"})
@@ -91,6 +104,7 @@ class User implements UserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        // $roles[] = 'ROLE_PARENT';
 
         return array_unique($roles);
     }
@@ -117,6 +131,21 @@ class User implements UserInterface
         return $this;
     }
 
+     /**
+     * @see UserInterface
+     */
+    public function getPlainPassword(): string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -131,7 +160,7 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getTeacher(): ?Teachers
