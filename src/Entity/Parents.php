@@ -52,43 +52,43 @@ class Parents
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read","user:read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read","user:read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read","user:read"})
      */
     private $adress;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read","user:read"})
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read","user:read"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read"})
+     * @Groups({"parent:read","parent:full:read","parent:post","student:full:read","user:read"})
      */
     private $phone;
 
     /**
      * @ORM\ManyToMany(targetEntity=Students::class, mappedBy="parents")
-     * @Groups({"parent:read","parent:full:read"})
+     * @Groups({"parent:read","parent:full:read",})
      */
     private $students;
 

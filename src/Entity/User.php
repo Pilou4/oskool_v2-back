@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+// use ApiPlatform\Core\Annotation\ApiFilter;
+// use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -17,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  *  "get",
  *  "post"={
  *      "normalization_context"={"groups"={"user:post"}},
- *      "path"="/login/add",
+ *      "path"="/users/add",
  *  }
  * },
  * itemOperations={"get"}
