@@ -46,7 +46,7 @@ class Parents
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"parent:read","parent:full:read", "student:full:read"})
+     * @Groups({"parent:read","parent:full:read", "student:full:read", "user:read"})
      */
     private $id;
 
@@ -88,7 +88,7 @@ class Parents
 
     /**
      * @ORM\ManyToMany(targetEntity=Students::class, mappedBy="parents")
-     * @Groups({"parent:read","parent:full:read",})
+     * @Groups({"parent:read","parent:full:read","user:read"})
      */
     private $students;
 

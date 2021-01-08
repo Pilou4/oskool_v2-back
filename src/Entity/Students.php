@@ -43,55 +43,55 @@ class Students
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"school:full:read","parent:read","student:read","student:full:read","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:read","student:full:read","parent:full:read", "user:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"school:full:read","parent:read","student:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"school:full:read","parent:read","student:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $birthday;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $level;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $hobbies;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $health;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read"})
+     * @Groups({"school:full:read","parent:read","student:full:read","student:post","parent:full:read", "user:read"})
      */
     private $image_right;
 

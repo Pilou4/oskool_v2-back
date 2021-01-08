@@ -37,13 +37,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"parent:read","parent:full:read","user:read","user:post"})
+     * @Groups({"parent:read","parent:full:read","user:read","user:post","parent:full:read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"user:read"})
+     * @Groups({"user:read","parent:full:read","parent:read"})
      */
     private $roles = ["ROLE_PARENT"];
 
